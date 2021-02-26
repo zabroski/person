@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 import styled from 'styled-components';
 // import Radium, { StyleRoot }from 'radium';
 
@@ -92,12 +92,12 @@ render () {
       persons = (
       <div>
         {this.state.persons.map((person, index) => {
-          return <Person
-          click={() =>this.deletePersonHandle(index)}
-            name={person.name}
-            age={person.age}
-            key={index}
-            changed={(event) => this.nameChangedHandler(event, person.id)} />
+          return<Person
+              click={() =>this.deletePersonHandle(index)}
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} /> 
             
         })}
      </div>
