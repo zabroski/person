@@ -1,23 +1,8 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import Person from '../components/Persons/Person/Person';
-import styled from 'styled-components';
-// import Radium, { StyleRoot }from 'radium';
+import Persons from '../components/Persons/Persons';
 
-const StyleButton = styled.button`
-
-      background-color: green;
-      color: white;
-      font: white
-      boder: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      &:hover {
-        background-color: lightgreen;
-        color: black;
-      }
-`;
 class  App extends Component {
   state ={
     persons: [
@@ -39,14 +24,10 @@ nameChangedHandler = (event, id) => {
   };
 
   person.name = event.target.value;
-  const persons =[...this.state.persons]
+  const persons =[...this.state.persons];
   person[personIndex] = person;
 
   this.setState({persons:persons});
-
-
-
-
 
   this.setState({
     persons: [
@@ -55,7 +36,7 @@ nameChangedHandler = (event, id) => {
       { name: 'Raye', age: 20},
     ]
   })
-} 
+};
 
 
 deletePersonHandle = (personIndex) => {
@@ -91,17 +72,14 @@ render () {
     if(this.state.showPerson) {
       persons = (
       <div>
-        {this.state.persons.map((person, index) => {
-          return<Person
-              click={() =>this.deletePersonHandle(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)} /> 
-            
-        })}
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandle}
+          changed={this.nameChangedHandler}
+        />
      </div>
-      );
+
+    );
 
       style.backgroundColor= 'red';
       style[':hover'] = {
@@ -123,7 +101,9 @@ render () {
         <div className="App">
           <h1>Hi, I am React</h1>
           <p className={classes.join(' ')}>This is really working</p>
-          <StyleButton onClick={()=> this.togglePersonHandler()}>Swith Name</StyleButton>
+          <button 
+            className="button"
+            onClick={()=> this.togglePersonHandler()}>Swith Name</button>
             { persons}
         </div>
  
