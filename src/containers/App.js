@@ -1,48 +1,49 @@
-
 import React, { Component } from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
 
 class  App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('constructor')
+  }
   state ={
     persons: [
       { id: 'toto', name: 'Summer', age: 27},
-      { id: 'vahy5', name: 'Grady', age: 29},
-      { id: 'fgot6',name: 'Raye', age: 20},
+      { id: 'grady14', name: 'Grady', age: 29},
+      { id: 'raye2',name: 'Raye', age: 2},
     ],
     otherState: 'some other value',
     showPerson: false,
 }
 
+
+// static getDerivedSatateFormProps
+
 nameChangedHandler = (event, id) => {
   const personIndex = this.state.persons.findIndex(p => {
     return p.id === id;
-  });
+  })
 
-  const person =  {
+  const person = {
     ...this.state.persons[personIndex]
   };
 
+  // const person = Object.assign({}, this.state.persons[personIndex]);
+
   person.name = event.target.value;
-  const persons =[...this.state.persons];
-  person[personIndex] = person;
 
-  this.setState({persons:persons});
+  const persons = [...this.state.persons]
+  persons[personIndex] = person;
 
-  this.setState({
-    persons: [
-      { name: 'Summer', age: 27},
-      { name: event.target.value, age: 29},
-      { name: 'Raye', age: 20},
-    ]
-  })
-};
+  this.setState({persons:persons})
+}
 
 
 deletePersonHandle = (personIndex) => {
   const persons = [...this.state.persons]
   persons.splice(personIndex, 1);
-  this.setState({persons:persons})
+  this.setState({ persons: persons })
 
 }
 
@@ -54,19 +55,7 @@ togglePersonHandler = () => {
 }
 
 render () {
-    const style= {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'white',
-      boder: '1px solid red',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor:'lightgreen',
-        color: 'black'
-      }
-    };
-
+  
     let persons = null;
 
     if(this.state.showPerson) {
@@ -74,18 +63,13 @@ render () {
       <div>
         <Persons
           persons={this.state.persons}
-          clicked={this.deletePersonHandle}
+          click={this.deletePersonHandle}
           changed={this.nameChangedHandler}
         />
      </div>
 
     );
 
-      style.backgroundColor= 'red';
-      style[':hover'] = {
-        backgroundColor:'salmon',
-        color: 'black'
-      }
     }
 
 
@@ -103,7 +87,7 @@ render () {
           <p className={classes.join(' ')}>This is really working</p>
           <button 
             className="button"
-            onClick={()=> this.togglePersonHandler()}>Swith Name</button>
+            onClick={()=> this.togglePersonHandler()}>Toggle Persons</button>
             { persons}
         </div>
  
